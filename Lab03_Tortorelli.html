@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Luiza Tortorelli">
+
+<title>ME315 - Lab 03</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Lab03_Tortorelli_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Lab03_Tortorelli_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="Lab03_Tortorelli_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="Lab03_Tortorelli_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="Lab03_Tortorelli_files/libs/quarto-html/popper.min.js"></script>
+<script src="Lab03_Tortorelli_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Lab03_Tortorelli_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Lab03_Tortorelli_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Lab03_Tortorelli_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Lab03_Tortorelli_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Lab03_Tortorelli_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Lab03_Tortorelli_files/libs/bootstrap/bootstrap-6a8e6d95bfcd174082ff54166b04dcf7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="Lab03_Tortorelli_files/libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="Lab03_Tortorelli_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="Lab03_Tortorelli_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="Lab03_Tortorelli_files/libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="Lab03_Tortorelli_files/libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="Lab03_Tortorelli_files/libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="Lab03_Tortorelli_files/libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="Lab03_Tortorelli_files/libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="Lab03_Tortorelli_files/libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="Lab03_Tortorelli_files/libs/leaflet-binding-2.2.3/leaflet.js"></script>
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">ME315 - Lab 03</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Luiza Tortorelli </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"readr"</span>, <span class="st">"dplyr"</span>, <span class="st">"tidyr"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing packages into '/cloud/lib/x86_64-pc-linux-gnu-library/4.6'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="atrasos-de-voos" class="level1">
+<h1>Atrasos de Voos</h1>
+<ol type="1">
+<li>Importe, utilizando o pacote readr, cada um dos três arquivos disponíveis. Os objetos resultantes devem ser chamados flights, airlines e airports.</li>
+</ol>
+<ul>
+<li>Para o arquivo de aeroportos, importe apenas as colunas IATA_CODE, CITY, STATE, LATITUDE, LONGITUDE;</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>airlines <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"airlines.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 14 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): IATA_CODE, AIRLINE
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>airports <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"airports.csv"</span>, </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">col_select =</span> <span class="fu">c</span>(IATA_CODE, CITY, STATE, LATITUDE, LONGITUDE))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 322 Columns: 5
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (3): IATA_CODE, CITY, STATE
+dbl (2): LATITUDE, LONGITUDE
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<ul>
+<li>Para o arquivo de vôos:</li>
+</ul>
+<ol type="a">
+<li>Importe apenas as colunas DESTINATION_AIRPORT e ARRIVAL_DELAY;</li>
+<li>Leia apenas 1 milhão de linhas por vez;</li>
+<li>Remova vôos em que o aeroporto de destino comece com a letra 1;</li>
+<li>Remova registros em que existam pelo menos uma coluna faltante;</li>
+<li>Determine, para cada parte do arquivo, as estatísticas suficientes para a determinação do atraso médio por aeroporto de destino;</li>
+<li>Ao finalizar a leitura do arquivo, combine as estatísticas suficientes de modo a produzir a média de atraso por aeroporto.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>processar_voos <span class="ot">&lt;-</span> <span class="cf">function</span>(chunk, pos) {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  chunk <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">startsWith</span>(DESTINATION_AIRPORT, <span class="st">"1"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(DESTINATION_AIRPORT) <span class="sc">|&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">soma_atraso =</span> <span class="fu">sum</span>(ARRIVAL_DELAY),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">qtd_voos =</span> <span class="fu">n</span>(),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">.groups =</span> <span class="st">'drop'</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>estatisticas_chunks <span class="ot">&lt;-</span> <span class="fu">read_csv_chunked</span>(</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"flights.csv"</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">callback =</span> DataFrameCallback<span class="sc">$</span><span class="fu">new</span>(processar_voos),</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">chunk_size =</span> <span class="dv">1000000</span>,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols_only</span>(</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">DESTINATION_AIRPORT =</span> <span class="fu">col_character</span>(),</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">ARRIVAL_DELAY =</span> <span class="fu">col_double</span>()</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>flights <span class="ot">&lt;-</span> estatisticas_chunks <span class="sc">|&gt;</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(DESTINATION_AIRPORT) <span class="sc">|&gt;</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">soma_total =</span> <span class="fu">sum</span>(soma_atraso),</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">voos_totais =</span> <span class="fu">sum</span>(qtd_voos),</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">'drop'</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ATRASO_MEDIO =</span> soma_total <span class="sc">/</span> voos_totais) <span class="sc">|&gt;</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(DESTINATION_AIRPORT, ATRASO_MEDIO)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="1">
+<li>Selecione a operação apropriada join para incluir, na tabela flights, as colunas CITY e STATE do objeto airports. Para executar esta tarefa:</li>
+</ol>
+<!-- -->
+<ol type="a">
+<li><p>Identifique a coluna que é a chave na tabela flights;</p>
+<p><em>Resposta:</em> A chave na tabela <code>flights</code> é <code>DESTINATION_AIRPORT</code>.</p></li>
+<li><p>Identifique a coluna que é a chave na tabela airports;</p>
+<p><em>Resposta:</em> A chave na tabela <code>airports</code> é <code>IATA_CODE</code>.</p></li>
+<li><p>Quais são os aeroportos que estão listados em flights, mas estão ausentes em airports?</p>
+<p><em>Resposta:</em> Não há nenhum aeroporto listado em <code>flights</code> que não esteja listado em <code>airports</code>.</p></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>aeroportos_ausentes <span class="ot">&lt;-</span> <span class="fu">anti_join</span>(flights, airports, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"DESTINATION_AIRPORT"</span> <span class="ot">=</span> <span class="st">"IATA_CODE"</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(aeroportos_ausentes<span class="sc">$</span>DESTINATION_AIRPORT)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>character(0)</code></pre>
+</div>
+</div>
+<ol start="4" type="a">
+<li>Apresente o comando que combine ambas as tabelas, indicando explicitamente as chaves; <em>Resposta:</em> O comando que combina as tabelas é o <code>left_join</code></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(flights, airports, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"DESTINATION_AIRPORT"</span> <span class="ot">=</span> <span class="st">"IATA_CODE"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 322 × 6
+   DESTINATION_AIRPORT ATRASO_MEDIO CITY          STATE LATITUDE LONGITUDE
+   &lt;chr&gt;                      &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+ 1 ABE                         5.80 Allentown     PA        40.7     -75.4
+ 2 ABI                         4.08 Abilene       TX        32.4     -99.7
+ 3 ABQ                         5.61 Albuquerque   NM        35.0    -107. 
+ 4 ABR                        -3.39 Aberdeen      SD        45.4     -98.4
+ 5 ABY                         8.68 Albany        GA        31.5     -84.2
+ 6 ACK                         4.91 Nantucket     MA        41.3     -70.1
+ 7 ACT                        10.6  Waco          TX        31.6     -97.2
+ 8 ACV                         9.68 Arcata/Eureka CA        41.0    -124. 
+ 9 ACY                        11.8  Atlantic City NJ        39.5     -74.6
+10 ADK                        -3.19 Adak          AK        51.9    -177. 
+# ℹ 312 more rows</code></pre>
+</div>
+</div>
+<ol start="5" type="a">
+<li>Armazene a tabela resultante no objeto flights.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>flights <span class="ot">&lt;-</span> <span class="fu">left_join</span>(flights, airports, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"DESTINATION_AIRPORT"</span> <span class="ot">=</span> <span class="st">"IATA_CODE"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="3" type="1">
+<li>Quantos aeroportos cada estado possui? Apresente uma tabela ordenada de forma decrescente (no número de aeroportos).</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>aeroportos_por_estado <span class="ot">&lt;-</span> airports <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(STATE) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_aeroportos =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(total_aeroportos))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(aeroportos_por_estado)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 54 × 2
+   STATE total_aeroportos
+   &lt;chr&gt;            &lt;int&gt;
+ 1 TX                  24
+ 2 CA                  22
+ 3 AK                  19
+ 4 FL                  17
+ 5 MI                  15
+ 6 NY                  14
+ 7 CO                  10
+ 8 MN                   8
+ 9 MT                   8
+10 NC                   8
+# ℹ 44 more rows</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Apresente um mapa representando todos os atrasos observados por aeroporto.</li>
+</ol>
+<!-- -->
+<ol type="a">
+<li>Carregue o pacote leaflet;</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"leaflet"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into '/cloud/lib/x86_64-pc-linux-gnu-library/4.6'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="a">
+<li>Combine os comandos leaflet, addTiles e addMarkers para a criação de um mapa básico;</li>
+<li>Armazene o grafico em b) numa variável chamada this;</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>flights_mapa <span class="ot">&lt;-</span> flights <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(LATITUDE, LONGITUDE)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>this <span class="ot">&lt;-</span> <span class="fu">leaflet</span>(<span class="at">data =</span> flights_mapa) <span class="sc">%&gt;%</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">lng =</span> <span class="sc">~</span>LONGITUDE,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> <span class="sc">~</span>LATITUDE,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup =</span> <span class="sc">~</span><span class="fu">paste</span>(<span class="st">"Aeroporto:"</span>, DESTINATION_AIRPORT, </span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"&lt;br&gt;Atraso Médio:"</span>, <span class="fu">round</span>(ATRASO_MEDIO, <span class="dv">2</span>), <span class="st">"minutos"</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>this</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-6113952d1498df73e6a5" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-6113952d1498df73e6a5">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addMarkers","args":[[40.65236,32.41132,35.04022,45.44906,31.53552,41.25305,31.61129,40.97812,39.45758,51.87796,57.74997,31.32737,33.36996,58.6768,42.74812,42.55708,35.21937,61.17432,45.07807,39.22316,33.64044,44.25741,30.19453,35.43619,41.33815,42.23488,41.93887,60.77978,35.4336,42.20848,44.80744,33.56294,45.80766,46.77411,47.50942,48.79275,40.47799,36.12448,43.56444,42.36435,29.95083,31.25903,18.49486,46.39786,25.90683,71.28545,45.9548,30.53316,44.473,42.94052,34.20062,39.1754,45.7769,33.93884,40.91631,37.70097,60.49183,41.78016,35.03527,38.13864,32.89865,41.88459,46.25075,33.12723,41.41089,30.58859,35.21401,39.99799,40.03925,47.16842,38.75496,44.52019,38.80581,38.81809,42.90836,27.77036,38.37315,32.51633,39.04614,44.77762,29.17992,32.84711,39.90238,42.40296,38.85208,39.85841,32.89595,31.32134,46.79739,59.04541,46.84209,37.15152,41.53493,42.21206,48.11425,44.86526,39.64257,40.82493,42.15991,31.80667,42.08202,45.72267,44.12326,38.03799,35.07297,40.6925,24.55611,64.81368000000001,46.91935,36.77619,34.99147,48.3114,35.13845,26.07258,42.9655,43.58135,35.33659,40.97847,44.3489,37.92752,47.61986,47.94926,32.38486,39.12241,29.69006,30.40728,44.48507,40.96747,31.0649,42.88082,36.09775,34.89567,58.42438,47.482,33.45033,38.53396,13.48345,40.48118,47.3866,46.60682,21.31869,32.68753,29.64542,41.06696,26.22851,34.64045,41.66934,38.84494,38.94453,43.10726,29.98047,37.64996,43.51456,39.67872,34.27061,45.81835,39.71733,48.56619,48.17794,40.79524,42.49103,19.72026,43.60732,32.31117,30.49406,40.63975,37.15181,46.92972,58.35496,19.73877,55.35557,42.7787,41.31205,36.08036,34.56771,33.94254,33.66364,40.27594,30.1261,38.03697,30.20528,40.77724,33.81772,21.97598,34.7294,40.85097,27.54374,43.87938,46.3745,31.94253,43.53291,39.29761,28.42889,40.1935,41.78598,32.33313,35.04242,26.17583,42.37423,32.30064,39.14097,42.93452,25.79325,42.94722,43.16949,28.10275,41.44853,32.51087,37.62405,30.69142,48.25938,46.35364,36.58698,43.13986,46.91631,44.88055,29.99339,38.50887,41.39303,33.67975,34.82916,37.72129,20.89865,35.39309,41.30252,64.51220000000001,34.056,41.9796,36.89461,42.26734,43.41714,66.88468,37.06083,26.68316,45.58872,37.1319,39.87195,33.43417,40.66424,31.46715,42.91131,40.49147,45.57093,30.47331,14.33102,46.26468,18.0083,56.80165,33.82922,38.28909,41.724,43.64617,44.04532,40.50898,44.25407,35.87764,45.63119,37.50517,41.59422,39.49858,37.32547,43.11887,33.30156,43.90883,26.53617,35.61678,32.73356,29.53369,32.12758,34.42621,41.70895,35.23706,70.19476,40.85121,38.17439,47.44898,37.619,37.24433,37.09058,32.44663,57.04714,37.36186,31.35775,18.43942,40.78839,38.69542,34.89925,33.67566,39.84395,33.9888,27.39533,45.54532,38.74769,18.33731,17.70189,43.50484,42.4026,41.50409,43.11119,30.39653,41.58681,27.97547,36.47521,40.27669,36.19837,32.11608,44.74144,42.4818,33.45371,32.35414,35.81249,40.4409,30.7825,30.48325,56.48433,44.6884,36.28187,59.50336,32.65658],[-75.4404,-99.6819,-106.60919,-98.42183,-84.19447,-70.06018,-97.23052,-124.10862,-74.57717,-176.64603,-152.49386,-92.54855999999999,-81.9645,-156.64922,-73.80298000000001,-92.40034,-101.70593,-149.99619,-83.56028999999999,-106.86885,-84.42694,-88.51948,-97.66987,-82.54181,-75.72427,-85.55206,-72.68322999999999,-161.838,-119.05677,-75.97960999999999,-68.82814,-86.75355,-108.54286,-100.74672,-94.93371999999999,-122.53753,-88.91595,-86.67818,-116.22278,-71.00518,-94.02069,-81.46630999999999,-67.12944,-94.13723,-97.42586,-156.766,-112.49746,-91.14963,-73.15031,-78.73217,-118.3585,-76.6682,-111.15301,-81.11954,-81.44247,-113.09858,-145.47765,-124.23653,-85.20379,-78.45286,-80.04051,-91.71087,-84.47239,-117.27873,-81.8494,-96.36382,-80.94313,-82.89188,-88.27806,-88.48905999999999,-109.75484,-109.0238,-104.70025,-92.21963,-106.46447,-97.50122,-81.59319000000001,-84.93886000000001,-84.66217,-89.66678,-81.05806,-96.85177,-84.21938,-90.70917,-77.03771999999999,-104.667,-97.0372,-85.44963,-102.80195,-158.50334,-92.19365000000001,-107.75377,-93.66068,-83.34884,-98.90877999999999,-91.48506999999999,-106.9177,-115.7917,-76.89144,-106.37781,-80.17622,-87.09372999999999,-123.21869,-87.53063,-77.04294,-74.16866,-81.75955999999999,-147.85967,-96.81498999999999,-119.71814,-78.88,-114.25507,-111.67122,-80.15275,-83.74346,-96.74169999999999,-94.36744,-85.19515,-105.53936,-100.72441,-117.53384,-97.17610999999999,-94.71171,-108.52673,-82.27178000000001,-89.07008999999999,-88.12958999999999,-98.30861,-97.8278,-85.52276999999999,-79.93729999999999,-82.21886000000001,-135.70738,-111.37069,-88.59137,-106.93318,-144.79598,-107.21766,-92.83899,-111.98275,-157.92241,-103.21703,-95.27889,-73.70757,-97.65439000000001,-86.77311,-70.28036,-99.27403,-77.45581,-78.94538,-95.33972,-97.43304999999999,-112.07017,-75.60653000000001,-77.90255999999999,-88.11454000000001,-86.29438,-93.40307,-103.64235,-73.10021,-76.45844,-155.04847,-110.73774,-90.07589,-81.68786,-73.77893,-94.49827000000001,-98.6782,-134.57628,-156.04563,-131.71374,-84.58736,-105.67499,-115.15233,-98.41664,-118.40807,-101.82278,-79.40479999999999,-93.2234,-84.60539,-91.98766000000001,-73.87260999999999,-118.15161,-159.33896,-92.22425,-96.75924999999999,-99.46154,-91.25654,-117.01539,-102.20191,-84.07965,-94.71391,-81.31603,-76.7634,-87.75242,-88.75121,-89.97667,-98.23860999999999,-122.8735,-86.39398,-96.67083,-71.43706,-80.29056,-87.89658,-86.23822,-80.64581,-90.50754000000001,-92.03769,-118.83777,-88.24283,-101.28033,-87.39536,-121.84295,-89.33750999999999,-114.09056,-93.21692,-90.25803000000001,-107.89383,-70.61433,-78.92833,-77.61214,-122.22072,-156.43046,-97.60073,-95.89417,-165.44525,-117.60119,-87.90446,-76.20122000000001,-71.87571,-124.24603,-162.59855,-88.77375000000001,-80.09559,-122.5975,-76.49299000000001,-75.24114,-112.00806,-89.69331,-89.33705999999999,-112.59586,-80.23287000000001,-84.79671999999999,-87.18744,-170.71053,-119.11903,-66.56301000000001,-132.94528,-116.50625,-104.49657,-71.42822,-70.30875,-103.05737,-122.2934,-121.14996,-78.78747,-89.46745,-77.31967,-109.06519,-119.76806,-79.97543,-77.67238,-104.53056,-92.49799,-81.75517000000001,-106.08814,-117.18966,-98.46978,-81.20214,-119.84037,-86.31847,-120.64239,-148.46516,-77.8463,-85.736,-122.30931,-122.37484,-93.38686,-113.59306,-93.82559999999999,-135.3616,-121.92901,-100.49631,-66.00183,-111.97777,-121.59077,-120.45758,-117.86822,-89.67762,-98.49189,-82.55410999999999,-94.05834,-90.35999,-64.97336,-64.79855999999999,-114.29659,-96.38437,-74.10484,-76.10630999999999,-84.35033,-83.80783,-82.53325,-82.40742,-74.81347,-95.88824,-110.94103,-85.58224,-114.48774,-93.99102000000001,-95.40239,-83.99285999999999,-109.50992,-83.27672,-86.5254,-132.36982,-111.11764,-94.30681,-139.66023,-114.60597],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Aeroporto: ABE <br>Atraso Médio: 5.8 minutos","Aeroporto: ABI <br>Atraso Médio: 4.08 minutos","Aeroporto: ABQ <br>Atraso Médio: 5.61 minutos","Aeroporto: ABR <br>Atraso Médio: -3.39 minutos","Aeroporto: ABY <br>Atraso Médio: 8.68 minutos","Aeroporto: ACK <br>Atraso Médio: 4.91 minutos","Aeroporto: ACT <br>Atraso Médio: 10.64 minutos","Aeroporto: ACV <br>Atraso Médio: 9.68 minutos","Aeroporto: ACY <br>Atraso Médio: 11.83 minutos","Aeroporto: ADK <br>Atraso Médio: -3.19 minutos","Aeroporto: ADQ <br>Atraso Médio: -0.67 minutos","Aeroporto: AEX <br>Atraso Médio: 6.23 minutos","Aeroporto: AGS <br>Atraso Médio: 6.37 minutos","Aeroporto: AKN <br>Atraso Médio: 2.38 minutos","Aeroporto: ALB <br>Atraso Médio: 6.58 minutos","Aeroporto: ALO <br>Atraso Médio: 5.95 minutos","Aeroporto: AMA <br>Atraso Médio: 6.67 minutos","Aeroporto: ANC <br>Atraso Médio: 1.78 minutos","Aeroporto: APN <br>Atraso Médio: 1.6 minutos","Aeroporto: ASE <br>Atraso Médio: 15.83 minutos","Aeroporto: ATL <br>Atraso Médio: 2.23 minutos","Aeroporto: ATW <br>Atraso Médio: 3.57 minutos","Aeroporto: AUS <br>Atraso Médio: 6.72 minutos","Aeroporto: AVL <br>Atraso Médio: 6.5 minutos","Aeroporto: AVP <br>Atraso Médio: 9.8 minutos","Aeroporto: AZO <br>Atraso Médio: 1.26 minutos","Aeroporto: BDL <br>Atraso Médio: 6.6 minutos","Aeroporto: BET <br>Atraso Médio: 2.78 minutos","Aeroporto: BFL <br>Atraso Médio: 5.5 minutos","Aeroporto: BGM <br>Atraso Médio: 4.21 minutos","Aeroporto: BGR <br>Atraso Médio: 2.22 minutos","Aeroporto: BHM <br>Atraso Médio: 5.61 minutos","Aeroporto: BIL <br>Atraso Médio: 1.78 minutos","Aeroporto: BIS <br>Atraso Médio: 4.82 minutos","Aeroporto: BJI <br>Atraso Médio: -1.8 minutos","Aeroporto: BLI <br>Atraso Médio: -6.8 minutos","Aeroporto: BMI <br>Atraso Médio: 7.24 minutos","Aeroporto: BNA <br>Atraso Médio: 4.32 minutos","Aeroporto: BOI <br>Atraso Médio: 5.96 minutos","Aeroporto: BOS <br>Atraso Médio: 6.25 minutos","Aeroporto: BPT <br>Atraso Médio: 14.63 minutos","Aeroporto: BQK <br>Atraso Médio: 5.87 minutos","Aeroporto: BQN <br>Atraso Médio: 12.19 minutos","Aeroporto: BRD <br>Atraso Médio: -3.62 minutos","Aeroporto: BRO <br>Atraso Médio: 4.47 minutos","Aeroporto: BRW <br>Atraso Médio: 4.06 minutos","Aeroporto: BTM <br>Atraso Médio: -3.96 minutos","Aeroporto: BTR <br>Atraso Médio: 9.06 minutos","Aeroporto: BTV <br>Atraso Médio: 8.93 minutos","Aeroporto: BUF <br>Atraso Médio: 5.39 minutos","Aeroporto: BUR <br>Atraso Médio: 4.59 minutos","Aeroporto: BWI <br>Atraso Médio: 3.6 minutos","Aeroporto: BZN <br>Atraso Médio: 2.72 minutos","Aeroporto: CAE <br>Atraso Médio: 9.46 minutos","Aeroporto: CAK <br>Atraso Médio: 5.1 minutos","Aeroporto: CDC <br>Atraso Médio: 7.28 minutos","Aeroporto: CDV <br>Atraso Médio: 0.89 minutos","Aeroporto: CEC <br>Atraso Médio: 4.28 minutos","Aeroporto: CHA <br>Atraso Médio: 6.23 minutos","Aeroporto: CHO <br>Atraso Médio: 10.73 minutos","Aeroporto: CHS <br>Atraso Médio: 4.04 minutos","Aeroporto: CID <br>Atraso Médio: 7.46 minutos","Aeroporto: CIU <br>Atraso Médio: 5.62 minutos","Aeroporto: CLD <br>Atraso Médio: 4.39 minutos","Aeroporto: CLE <br>Atraso Médio: 4.57 minutos","Aeroporto: CLL <br>Atraso Médio: 1.61 minutos","Aeroporto: CLT <br>Atraso Médio: 2.07 minutos","Aeroporto: CMH <br>Atraso Médio: 5.28 minutos","Aeroporto: CMI <br>Atraso Médio: 3.66 minutos","Aeroporto: CMX <br>Atraso Médio: 4.2 minutos","Aeroporto: CNY <br>Atraso Médio: -11.58 minutos","Aeroporto: COD <br>Atraso Médio: 4.19 minutos","Aeroporto: COS <br>Atraso Médio: 10.17 minutos","Aeroporto: COU <br>Atraso Médio: 10.82 minutos","Aeroporto: CPR <br>Atraso Médio: -0.83 minutos","Aeroporto: CRP <br>Atraso Médio: 9.12 minutos","Aeroporto: CRW <br>Atraso Médio: 8.05 minutos","Aeroporto: CSG <br>Atraso Médio: 8.42 minutos","Aeroporto: CVG <br>Atraso Médio: 6.19 minutos","Aeroporto: CWA <br>Atraso Médio: 8.33 minutos","Aeroporto: DAB <br>Atraso Médio: 2.05 minutos","Aeroporto: DAL <br>Atraso Médio: 4.07 minutos","Aeroporto: DAY <br>Atraso Médio: 5.63 minutos","Aeroporto: DBQ <br>Atraso Médio: 3.37 minutos","Aeroporto: DCA <br>Atraso Médio: 4.06 minutos","Aeroporto: DEN <br>Atraso Médio: 5.08 minutos","Aeroporto: DFW <br>Atraso Médio: 5.87 minutos","Aeroporto: DHN <br>Atraso Médio: 5.74 minutos","Aeroporto: DIK <br>Atraso Médio: -2.85 minutos","Aeroporto: DLG <br>Atraso Médio: -4.19 minutos","Aeroporto: DLH <br>Atraso Médio: 4.31 minutos","Aeroporto: DRO <br>Atraso Médio: 1.68 minutos","Aeroporto: DSM <br>Atraso Médio: 7.43 minutos","Aeroporto: DTW <br>Atraso Médio: 3.71 minutos","Aeroporto: DVL <br>Atraso Médio: -0.33 minutos","Aeroporto: EAU <br>Atraso Médio: 6.97 minutos","Aeroporto: EGE <br>Atraso Médio: 10.15 minutos","Aeroporto: EKO <br>Atraso Médio: 1.35 minutos","Aeroporto: ELM <br>Atraso Médio: 7.58 minutos","Aeroporto: ELP <br>Atraso Médio: 7.23 minutos","Aeroporto: ERI <br>Atraso Médio: 5.74 minutos","Aeroporto: ESC <br>Atraso Médio: 1.16 minutos","Aeroporto: EUG <br>Atraso Médio: 4.61 minutos","Aeroporto: EVV <br>Atraso Médio: 2.79 minutos","Aeroporto: EWN <br>Atraso Médio: 8.27 minutos","Aeroporto: EWR <br>Atraso Médio: 7.46 minutos","Aeroporto: EYW <br>Atraso Médio: 5.56 minutos","Aeroporto: FAI <br>Atraso Médio: 2.09 minutos","Aeroporto: FAR <br>Atraso Médio: 5.87 minutos","Aeroporto: FAT <br>Atraso Médio: 7.61 minutos","Aeroporto: FAY <br>Atraso Médio: 5.41 minutos","Aeroporto: FCA <br>Atraso Médio: 1.28 minutos","Aeroporto: FLG <br>Atraso Médio: 5.2 minutos","Aeroporto: FLL <br>Atraso Médio: 5.57 minutos","Aeroporto: FNT <br>Atraso Médio: 4.43 minutos","Aeroporto: FSD <br>Atraso Médio: 9.04 minutos","Aeroporto: FSM <br>Atraso Médio: 10.31 minutos","Aeroporto: FWA <br>Atraso Médio: 5.58 minutos","Aeroporto: GCC <br>Atraso Médio: -2.73 minutos","Aeroporto: GCK <br>Atraso Médio: 4.87 minutos","Aeroporto: GEG <br>Atraso Médio: 3.44 minutos","Aeroporto: GFK <br>Atraso Médio: 2.4 minutos","Aeroporto: GGG <br>Atraso Médio: 4.04 minutos","Aeroporto: GJT <br>Atraso Médio: 2.17 minutos","Aeroporto: GNV <br>Atraso Médio: 8.26 minutos","Aeroporto: GPT <br>Atraso Médio: 4.83 minutos","Aeroporto: GRB <br>Atraso Médio: 4.25 minutos","Aeroporto: GRI <br>Atraso Médio: 1.11 minutos","Aeroporto: GRK <br>Atraso Médio: 5.7 minutos","Aeroporto: GRR <br>Atraso Médio: 5.94 minutos","Aeroporto: GSO <br>Atraso Médio: 7.04 minutos","Aeroporto: GSP <br>Atraso Médio: 5.35 minutos","Aeroporto: GST <br>Atraso Médio: 10.84 minutos","Aeroporto: GTF <br>Atraso Médio: 0.19 minutos","Aeroporto: GTR <br>Atraso Médio: 4.51 minutos","Aeroporto: GUC <br>Atraso Médio: 10.59 minutos","Aeroporto: GUM <br>Atraso Médio: 17.32 minutos","Aeroporto: HDN <br>Atraso Médio: 5.7 minutos","Aeroporto: HIB <br>Atraso Médio: -0.02 minutos","Aeroporto: HLN <br>Atraso Médio: -1.15 minutos","Aeroporto: HNL <br>Atraso Médio: 4.81 minutos","Aeroporto: HOB <br>Atraso Médio: 3.05 minutos","Aeroporto: HOU <br>Atraso Médio: 4.08 minutos","Aeroporto: HPN <br>Atraso Médio: 8.98 minutos","Aeroporto: HRL <br>Atraso Médio: 4.45 minutos","Aeroporto: HSV <br>Atraso Médio: 4.61 minutos","Aeroporto: HYA <br>Atraso Médio: 3.56 minutos","Aeroporto: HYS <br>Atraso Médio: -3.29 minutos","Aeroporto: IAD <br>Atraso Médio: 3.92 minutos","Aeroporto: IAG <br>Atraso Médio: 9.82 minutos","Aeroporto: IAH <br>Atraso Médio: 5.65 minutos","Aeroporto: ICT <br>Atraso Médio: 6.62 minutos","Aeroporto: IDA <br>Atraso Médio: 1.33 minutos","Aeroporto: ILG <br>Atraso Médio: 21.99 minutos","Aeroporto: ILM <br>Atraso Médio: 4.61 minutos","Aeroporto: IMT <br>Atraso Médio: -7.6 minutos","Aeroporto: IND <br>Atraso Médio: 4.92 minutos","Aeroporto: INL <br>Atraso Médio: -5.41 minutos","Aeroporto: ISN <br>Atraso Médio: 0.82 minutos","Aeroporto: ISP <br>Atraso Médio: 9.18 minutos","Aeroporto: ITH <br>Atraso Médio: 4.23 minutos","Aeroporto: ITO <br>Atraso Médio: 1.42 minutos","Aeroporto: JAC <br>Atraso Médio: 7.23 minutos","Aeroporto: JAN <br>Atraso Médio: 5.73 minutos","Aeroporto: JAX <br>Atraso Médio: 5.83 minutos","Aeroporto: JFK <br>Atraso Médio: 6.7 minutos","Aeroporto: JLN <br>Atraso Médio: 9.68 minutos","Aeroporto: JMS <br>Atraso Médio: 3.6 minutos","Aeroporto: JNU <br>Atraso Médio: 2.45 minutos","Aeroporto: KOA <br>Atraso Médio: 0.25 minutos","Aeroporto: KTN <br>Atraso Médio: 4.37 minutos","Aeroporto: LAN <br>Atraso Médio: 4.88 minutos","Aeroporto: LAR <br>Atraso Médio: -1.96 minutos","Aeroporto: LAS <br>Atraso Médio: 3.61 minutos","Aeroporto: LAW <br>Atraso Médio: 6.77 minutos","Aeroporto: LAX <br>Atraso Médio: 6.11 minutos","Aeroporto: LBB <br>Atraso Médio: 8.02 minutos","Aeroporto: LBE <br>Atraso Médio: 11.1 minutos","Aeroporto: LCH <br>Atraso Médio: 2.59 minutos","Aeroporto: LEX <br>Atraso Médio: 4.08 minutos","Aeroporto: LFT <br>Atraso Médio: 5.62 minutos","Aeroporto: LGA <br>Atraso Médio: 10.4 minutos","Aeroporto: LGB <br>Atraso Médio: 3.45 minutos","Aeroporto: LIH <br>Atraso Médio: 0.37 minutos","Aeroporto: LIT <br>Atraso Médio: 6.88 minutos","Aeroporto: LNK <br>Atraso Médio: 7.84 minutos","Aeroporto: LRD <br>Atraso Médio: 3.12 minutos","Aeroporto: LSE <br>Atraso Médio: 1.84 minutos","Aeroporto: LWS <br>Atraso Médio: -6.54 minutos","Aeroporto: MAF <br>Atraso Médio: 7.73 minutos","Aeroporto: MBS <br>Atraso Médio: 6.01 minutos","Aeroporto: MCI <br>Atraso Médio: 5.16 minutos","Aeroporto: MCO <br>Atraso Médio: 5.4 minutos","Aeroporto: MDT <br>Atraso Médio: 4.74 minutos","Aeroporto: MDW <br>Atraso Médio: 2.99 minutos","Aeroporto: MEI <br>Atraso Médio: 9.6 minutos","Aeroporto: MEM <br>Atraso Médio: 5.26 minutos","Aeroporto: MFE <br>Atraso Médio: 6.89 minutos","Aeroporto: MFR <br>Atraso Médio: 4.74 minutos","Aeroporto: MGM <br>Atraso Médio: 8.33 minutos","Aeroporto: MHK <br>Atraso Médio: 4.78 minutos","Aeroporto: MHT <br>Atraso Médio: 7.17 minutos","Aeroporto: MIA <br>Atraso Médio: 5.91 minutos","Aeroporto: MKE <br>Atraso Médio: 3.72 minutos","Aeroporto: MKG <br>Atraso Médio: 6.62 minutos","Aeroporto: MLB <br>Atraso Médio: 2.76 minutos","Aeroporto: MLI <br>Atraso Médio: 6.81 minutos","Aeroporto: MLU <br>Atraso Médio: 6.73 minutos","Aeroporto: MMH <br>Atraso Médio: 8.88 minutos","Aeroporto: MOB <br>Atraso Médio: 7.25 minutos","Aeroporto: MOT <br>Atraso Médio: 4.19 minutos","Aeroporto: MQT <br>Atraso Médio: 16.15 minutos","Aeroporto: MRY <br>Atraso Médio: 5.39 minutos","Aeroporto: MSN <br>Atraso Médio: 4.1 minutos","Aeroporto: MSO <br>Atraso Médio: -0.57 minutos","Aeroporto: MSP <br>Atraso Médio: 3.37 minutos","Aeroporto: MSY <br>Atraso Médio: 4.04 minutos","Aeroporto: MTJ <br>Atraso Médio: 8.69 minutos","Aeroporto: MVY <br>Atraso Médio: 1.79 minutos","Aeroporto: MYR <br>Atraso Médio: 7.84 minutos","Aeroporto: OAJ <br>Atraso Médio: 10.03 minutos","Aeroporto: OAK <br>Atraso Médio: 4.71 minutos","Aeroporto: OGG <br>Atraso Médio: 2.6 minutos","Aeroporto: OKC <br>Atraso Médio: 7.23 minutos","Aeroporto: OMA <br>Atraso Médio: 5.12 minutos","Aeroporto: OME <br>Atraso Médio: 6.32 minutos","Aeroporto: ONT <br>Atraso Médio: 6.41 minutos","Aeroporto: ORD <br>Atraso Médio: 7.24 minutos","Aeroporto: ORF <br>Atraso Médio: 6.1 minutos","Aeroporto: ORH <br>Atraso Médio: 0.49 minutos","Aeroporto: OTH <br>Atraso Médio: 16.74 minutos","Aeroporto: OTZ <br>Atraso Médio: 2.81 minutos","Aeroporto: PAH <br>Atraso Médio: 6.1 minutos","Aeroporto: PBI <br>Atraso Médio: 6.87 minutos","Aeroporto: PDX <br>Atraso Médio: 1.67 minutos","Aeroporto: PHF <br>Atraso Médio: 7.55 minutos","Aeroporto: PHL <br>Atraso Médio: 5.14 minutos","Aeroporto: PHX <br>Atraso Médio: 2.91 minutos","Aeroporto: PIA <br>Atraso Médio: 3.46 minutos","Aeroporto: PIB <br>Atraso Médio: 4.04 minutos","Aeroporto: PIH <br>Atraso Médio: -0.59 minutos","Aeroporto: PIT <br>Atraso Médio: 4.86 minutos","Aeroporto: PLN <br>Atraso Médio: 7.12 minutos","Aeroporto: PNS <br>Atraso Médio: 5.44 minutos","Aeroporto: PPG <br>Atraso Médio: 7.4 minutos","Aeroporto: PSC <br>Atraso Médio: 4.19 minutos","Aeroporto: PSE <br>Atraso Médio: 10.05 minutos","Aeroporto: PSG <br>Atraso Médio: 7.22 minutos","Aeroporto: PSP <br>Atraso Médio: 4.3 minutos","Aeroporto: PUB <br>Atraso Médio: -0.95 minutos","Aeroporto: PVD <br>Atraso Médio: 6.45 minutos","Aeroporto: PWM <br>Atraso Médio: 7.02 minutos","Aeroporto: RAP <br>Atraso Médio: 4.43 minutos","Aeroporto: RDD <br>Atraso Médio: 7.57 minutos","Aeroporto: RDM <br>Atraso Médio: 2.54 minutos","Aeroporto: RDU <br>Atraso Médio: 5.87 minutos","Aeroporto: RHI <br>Atraso Médio: -1.36 minutos","Aeroporto: RIC <br>Atraso Médio: 7.21 minutos","Aeroporto: RKS <br>Atraso Médio: -3.26 minutos","Aeroporto: RNO <br>Atraso Médio: 5.18 minutos","Aeroporto: ROA <br>Atraso Médio: 6.72 minutos","Aeroporto: ROC <br>Atraso Médio: 4.87 minutos","Aeroporto: ROW <br>Atraso Médio: 3.82 minutos","Aeroporto: RST <br>Atraso Médio: 3.76 minutos","Aeroporto: RSW <br>Atraso Médio: 3.56 minutos","Aeroporto: SAF <br>Atraso Médio: 4.42 minutos","Aeroporto: SAN <br>Atraso Médio: 3.68 minutos","Aeroporto: SAT <br>Atraso Médio: 5.87 minutos","Aeroporto: SAV <br>Atraso Médio: 5.24 minutos","Aeroporto: SBA <br>Atraso Médio: 3.99 minutos","Aeroporto: SBN <br>Atraso Médio: 8.66 minutos","Aeroporto: SBP <br>Atraso Médio: 3.58 minutos","Aeroporto: SCC <br>Atraso Médio: 0.48 minutos","Aeroporto: SCE <br>Atraso Médio: 10.21 minutos","Aeroporto: SDF <br>Atraso Médio: 5.64 minutos","Aeroporto: SEA <br>Atraso Médio: 1.97 minutos","Aeroporto: SFO <br>Atraso Médio: 6.58 minutos","Aeroporto: SGF <br>Atraso Médio: 8.71 minutos","Aeroporto: SGU <br>Atraso Médio: 5.23 minutos","Aeroporto: SHV <br>Atraso Médio: 7.77 minutos","Aeroporto: SIT <br>Atraso Médio: 2.11 minutos","Aeroporto: SJC <br>Atraso Médio: 4.21 minutos","Aeroporto: SJT <br>Atraso Médio: 3.44 minutos","Aeroporto: SJU <br>Atraso Médio: 6.88 minutos","Aeroporto: SLC <br>Atraso Médio: 0.4 minutos","Aeroporto: SMF <br>Atraso Médio: 5.45 minutos","Aeroporto: SMX <br>Atraso Médio: 0.64 minutos","Aeroporto: SNA <br>Atraso Médio: 1.58 minutos","Aeroporto: SPI <br>Atraso Médio: 8.73 minutos","Aeroporto: SPS <br>Atraso Médio: 4.95 minutos","Aeroporto: SRQ <br>Atraso Médio: 2.51 minutos","Aeroporto: STC <br>Atraso Médio: 23.03 minutos","Aeroporto: STL <br>Atraso Médio: 4.2 minutos","Aeroporto: STT <br>Atraso Médio: 5.59 minutos","Aeroporto: STX <br>Atraso Médio: 6.55 minutos","Aeroporto: SUN <br>Atraso Médio: 3.32 minutos","Aeroporto: SUX <br>Atraso Médio: 4.59 minutos","Aeroporto: SWF <br>Atraso Médio: 7.09 minutos","Aeroporto: SYR <br>Atraso Médio: 6.31 minutos","Aeroporto: TLH <br>Atraso Médio: 5.38 minutos","Aeroporto: TOL <br>Atraso Médio: 0.19 minutos","Aeroporto: TPA <br>Atraso Médio: 4.78 minutos","Aeroporto: TRI <br>Atraso Médio: 2.07 minutos","Aeroporto: TTN <br>Atraso Médio: 17.43 minutos","Aeroporto: TUL <br>Atraso Médio: 6.6 minutos","Aeroporto: TUS <br>Atraso Médio: 6.06 minutos","Aeroporto: TVC <br>Atraso Médio: 2.62 minutos","Aeroporto: TWF <br>Atraso Médio: 3.61 minutos","Aeroporto: TXK <br>Atraso Médio: 4.77 minutos","Aeroporto: TYR <br>Atraso Médio: 7.4 minutos","Aeroporto: TYS <br>Atraso Médio: 10.61 minutos","Aeroporto: VEL <br>Atraso Médio: -13.76 minutos","Aeroporto: VLD <br>Atraso Médio: 6.95 minutos","Aeroporto: VPS <br>Atraso Médio: 6.36 minutos","Aeroporto: WRG <br>Atraso Médio: 5.38 minutos","Aeroporto: WYS <br>Atraso Médio: 4.19 minutos","Aeroporto: XNA <br>Atraso Médio: 8.77 minutos","Aeroporto: YAK <br>Atraso Médio: 0.37 minutos","Aeroporto: YUM <br>Atraso Médio: 3.26 minutos"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[13.48345,71.28545],"lng":[-176.64603,-64.79855999999999]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<section id="horário" class="level3">
+<h3 class="anchored" data-anchor-id="horário">Horário</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">TZ =</span> <span class="st">"America/Sao_Paulo"</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2026-08-31 23:21:43 -03"</code></pre>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
