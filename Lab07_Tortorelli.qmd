@@ -1,0 +1,130 @@
+---
+title: "ME315 - Lab07"
+author: "Luiza Tortorelli"
+format: pdf
+editor: visual
+---
+
+# SQLite - Parte II
+
+## Atividade
+
+1.  Baixe o arquivo uwmadison.sqlite3. Conecte-se a ele usando o pacote RSQLite, armazenando a conexão em uma variável conn.
+
+```{r}
+library(RSQLite)
+
+conn <- dbConnect(SQLite(), "database.sqlite3")
+conn
+```
+
+```{r}
+dbListTables(conn)
+dbListFields(conn, "instructors")
+dbListFields(conn, "teachings")
+dbListFields(conn, "grade_distributions")
+dbListFields(conn, "sections")
+dbListFields(conn, "course_offerings")
+dbListFields(conn, "courses")
+dbListFields(conn, "schedules")
+dbListFields(conn, "subject_memberships")
+dbListFields(conn, "subjects")
+```
+
+2.  Quem são e quantos são os professores que lecionaram disciplinas cujo tópico era estatística (subjects.abbreviation='STAT');
+
+```{r}
+sql <- paste("SELECT DISTINCT instructors.id, instructors.name FROM instructors",
+             "INNER JOIN teachings ON teachings.instructor_id = instructors.id",
+             "INNER JOIN sections ON sections.uuid = teachings.section_uuid",
+             "INNER JOIN subject_memberships",
+             "  ON subject_memberships.course_offering_uuid = sections.course_offering_uuid",
+             "INNER JOIN subjects ON subjects.code = subject_memberships.subject_code",
+             "WHERE subjects.abbreviation = 'STAT'",
+             "ORDER BY instructors.name")
+profs <- dbGetQuery(conn, sql)
+head(profs)
+nrow(profs)
+```
+
+*Resposta:* A tabela apresenta o nome dos professores que lecionaram disciplinas de estatístca, havendo 379 deles.
+
+3.  O GPA americano é definido numa escala de 0 a 4, em que A = 4, AB = 3.5, B = 3, BC = 2.5, C = 2, D = 1 e F = 0. Determinando a nota média de cada oferecimento pela ponderação da quantidade de alunos em cada extrato com os valores numéricos de cada conceito, indique (no que se referente a disciplinas no assunto de estatística):
+
+- Quem é o professor mais difícil?
+- Quem é o professor mais fácil?
+- Qual é a disciplina mais difícil?
+- Qual é a disciplina mais fácil?
+
+```{r}
+sql <- paste(
+  "CREATE TEMP TABLE gpa_stat AS",
+  "SELECT DISTINCT teachings.instructor_id AS instructor_id,",
+  "course_offerings.course_uuid AS course_uuid,",
+  "grade_distributions.course_offering_uuid AS offering,",
+  "grade_distributions.section_number AS section_number,",
+  "(4.0*a_count + 3.5*ab_count + 3.0*b_count + 2.5*bc_count +",
+  "2.0*c_count + 1.0*d_count) /",
+  "(a_count + ab_count + b_count + bc_count + c_count + d_count + f_count) AS gpa,",
+  "(a_count + ab_count + b_count + bc_count + c_count + d_count + f_count) AS n",
+  "FROM grade_distributions",
+  "INNER JOIN sections",
+  "ON sections.course_offering_uuid = grade_distributions.course_offering_uuid",
+  "AND sections.number = grade_distributions.section_number",
+  "INNER JOIN teachings ON teachings.section_uuid = sections.uuid",
+  "INNER JOIN course_offerings",
+  "ON course_offerings.uuid = grade_distributions.course_offering_uuid",
+  "INNER JOIN subject_memberships",
+  "ON subject_memberships.course_offering_uuid = course_offerings.uuid",
+  "INNER JOIN subjects ON subjects.code = subject_memberships.subject_code",
+  "WHERE subjects.abbreviation = 'STAT'",
+  "AND (a_count + ab_count + b_count + bc_count + c_count + d_count + f_count) > 0")
+dbExecute(conn, sql)
+```
+
+```{r}
+sql_prof <- paste("SELECT instructors.name, AVG(gpa) AS gpa_medio, SUM(n) AS alunos",
+                  "FROM gpa_stat",
+                  "INNER JOIN instructors ON instructors.id = gpa_stat.instructor_id",
+                  "GROUP BY instructors.id, instructors.name",
+                  "ORDER BY gpa_medio")
+dbGetQuery(conn, paste(sql_prof, "LIMIT 1"))                # mais difícil
+dbGetQuery(conn, paste(sql_prof, "DESC LIMIT 1"))           # mais fácil
+```
+
+```{r}
+# Disciplina mais difícil / mais fácil
+sql_disc <- paste("SELECT courses.name, courses.number, AVG(gpa) AS gpa_medio, SUM(n) AS alunos",
+                  "FROM (SELECT DISTINCT course_uuid, offering, section_number, gpa, n",
+                  "      FROM gpa_stat) AS g",
+                  "INNER JOIN courses ON courses.uuid = g.course_uuid",
+                  "GROUP BY courses.uuid, courses.name, courses.number",
+                  "ORDER BY gpa_medio")
+dbGetQuery(conn, paste(sql_disc, "LIMIT 1"))                # mais difícil
+dbGetQuery(conn, paste(sql_disc, "DESC LIMIT 1"))           # mais fácil
+```
+
+*Resposta:*
+
+\- JAMES D KUELBS é o professor mais difícil.
+
+\- SRIKANTHMADHAVAN ARAVAMUTHAN é o professor mais fácil.
+
+\- "Introduction to the Theory of Probability" é a matéria mais difícil.
+
+\- "Nonparametric Statistics and Machine Learning Methods" é a matéria mais fácil.
+
+4.  Desconecte do banco de dados.
+
+```{r}
+dbDisconnect(conn)
+```
+
+### Data e Horário
+
+```{r}
+Sys.setenv(TZ = "America/Sao_Paulo")
+Sys.time()
+```
+
+
